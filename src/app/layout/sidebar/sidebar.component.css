@@ -1,0 +1,37 @@
+.sidebar {
+  width: 100%;
+  max-width: 18rem;
+  background: #111827;
+  color: #f9fafb;
+  border-radius: 1.25rem;
+  padding: 1.5rem 1rem;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.95rem 1rem;
+  color: #d1d5db;
+  border-radius: 0.95rem;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.sidebar .material-icons {
+  font-size: 1.2rem;
+}

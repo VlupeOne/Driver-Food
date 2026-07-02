@@ -1,0 +1,79 @@
+<section class="page-shell">
+  <header>
+    <p class="label">Categorias</p>
+    <h1>Controle de categorias</h1>
+  </header>
+
+  <div class="category-grid">
+    <section class="form-panel">
+      <h2>Nova categoria</h2>
+      <p class="subtitle">Crie categorias que facilitam o cadastro de despesas e receitas.</p>
+
+      <form [formGroup]="categoryForm" (ngSubmit)="submit()">
+        <div class="form-group">
+          <label for="name">Nome da categoria</label>
+          <input id="name" type="text" formControlName="name" placeholder="Ex: Gasolina" />
+          <small *ngIf="control['name']?.invalid && control['name']?.touched">O nome é obrigatório.</small>
+        </div>
+
+        <div class="form-group">
+          <label>Tipo</label>
+          <div class="type-group">
+            <button
+              type="button"
+              class="type-pill"
+              [class.active]="categoryForm.get('type')?.value === type.value"
+              *ngFor="let type of categoryTypes"
+              (click)="categoryForm.get('type')?.setValue(type.value)"
+            >
+              <span class="material-icons type-icon">{{ type.icon }}</span>
+              {{ type.label }}
+            </button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="icon">Ícone</label>
+            <select id="icon" formControlName="icon">
+              <option *ngFor="let icon of icons" [value]="icon">{{ icon }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="color">Cor</label>
+            <input id="color" type="color" formControlName="color" />
+          </div>
+        </div>
+
+        <div class="form-actions full-width">
+          <button type="submit" [disabled]="categoryForm.invalid">Salvar categoria</button>
+          <span class="success-message" *ngIf="successMessage">{{ successMessage }}</span>
+        </div>
+      </form>
+    </section>
+
+    <section class="list-panel">
+      <div class="list-header">
+        <div>
+          <h2>Categorias existentes</h2>
+          <p class="subtitle">Veja as categorias criadas e use-as no controle diário.</p>
+        </div>
+      </div>
+
+      <div class="grid" *ngIf="categories$ | async as categories">
+        <article *ngFor="let category of categories" class="category-card">
+          <div class="category-header" [style.background]="category.color">
+            <span class="material-icons">{{ category.icon }}</span>
+          </div>
+          <div class="category-body">
+            <h3>{{ category.name }}</h3>
+            <span class="category-pill" [class.income]="category.type === 'receita'" [class.expense]="category.type === 'despesa'">
+              {{ category.type | titlecase }}
+            </span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+</section>

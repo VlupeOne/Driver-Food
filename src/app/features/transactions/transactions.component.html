@@ -1,0 +1,143 @@
+<section class="page-shell">
+  <header>
+    <p class="label">Controle Diário</p>
+    <h1>Registro de faturamento e despesas</h1>
+  </header>
+
+  <form class="form-grid" [formGroup]="dailyForm" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label for="faturamento">Faturamento</label>
+      <input
+        id="faturamento"
+        type="number"
+        formControlName="faturamento"
+        min="0.01"
+        step="0.01"
+        placeholder="0,00"
+      />
+      <small *ngIf="control['faturamento']?.invalid && control['faturamento']?.touched">
+        Informe o faturamento do dia.
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="date">Data (opcional)</label>
+      <input id="date" type="date" formControlName="date" />
+      <small class="hint">Deixe em branco para usar data e hora atuais.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="gasolina">Gasolina</label>
+      <input
+        id="gasolina"
+        type="number"
+        formControlName="gasolina"
+        min="0"
+        step="0.01"
+        placeholder="0,00"
+      />
+      <small *ngIf="control['gasolina']?.invalid && control['gasolina']?.touched">
+        Informe um valor válido.
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="comida">Comida</label>
+      <input
+        id="comida"
+        type="number"
+        formControlName="comida"
+        min="0"
+        step="0.01"
+        placeholder="0,00"
+      />
+      <small *ngIf="control['comida']?.invalid && control['comida']?.touched">
+        Informe um valor válido.
+      </small>
+    </div>
+
+    <div class="form-group full-width extras-section">
+      <div class="extras-header">
+        <div>
+          <p class="label">Gastos Extras</p>
+          <p class="subtitle">Adicione itens personalizados de despesas do dia.</p>
+        </div>
+        <button type="button" class="secondary" (click)="addExtra()">+ Novo gasto</button>
+      </div>
+
+      <div class="extras-list" formArrayName="extras">
+        <div
+          *ngFor="let extra of extras.controls; let i = index"
+          [formGroupName]="i"
+          class="extra-item"
+          [class.saved-item]="extra.get('saved')?.value"
+        >
+          <div class="extra-fields">
+            <input
+              type="text"
+              formControlName="description"
+              placeholder="Descrição do gasto"
+              [readonly]="extra.get('saved')?.value"
+            />
+            <input
+              type="number"
+              formControlName="amount"
+              min="0.01"
+              step="0.01"
+              placeholder="Valor"
+              [readonly]="extra.get('saved')?.value"
+            />
+          </div>
+          <div class="extra-actions">
+            <button
+              type="button"
+              class="save-button"
+              *ngIf="!extra.get('saved')?.value"
+              (click)="saveExtra(i)"
+            >
+              Salvar gasto
+            </button>
+            <span class="saved-tag" *ngIf="extra.get('saved')?.value">Salvo</span>
+            <button type="button" class="remove-button" (click)="removeExtra(i)">Remover</button>
+          </div>
+          <div class="extra-errors">
+            <small *ngIf="extra.get('description')?.invalid && extra.get('description')?.touched">
+              Informe uma descrição.
+            </small>
+            <small *ngIf="extra.get('amount')?.invalid && extra.get('amount')?.touched">
+              Informe um valor válido.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <small *ngIf="extras.length === 0" class="hint">
+        Nenhum gasto extra cadastrado ainda.
+      </small>
+    </div>
+
+    <div class="form-group full-width">
+      <label for="observation">Observação</label>
+      <textarea id="observation" rows="4" formControlName="observation" placeholder="Anotações adicionais"></textarea>
+    </div>
+
+    <div class="summary-panel full-width">
+      <div class="summary-card">
+        <span>Total despesas</span>
+        <strong>R$ {{ totalExpenses | number:'1.2-2' }}</strong>
+      </div>
+      <div class="summary-card">
+        <span>Lucro previsto</span>
+        <strong [class.profit-negative]="profit < 0">R$ {{ profit | number:'1.2-2' }}</strong>
+      </div>
+    </div>
+
+    <div class="form-actions full-width">
+      <button type="submit" [disabled]="dailyForm.invalid">Salvar controle</button>
+      <div class="status-group">
+        <span class="success-message" *ngIf="statusMessage">{{ statusMessage }}</span>
+        <span class="recorded-at" *ngIf="recordedAt">Registrado em {{ recordedAt }}</span>
+      </div>
+    </div>
+  </form>
+</section>

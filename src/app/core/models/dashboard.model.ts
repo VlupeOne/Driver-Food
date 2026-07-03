@@ -1,8 +1,13 @@
-import { Transaction } from './transaction.model';
-
 export interface ChartPoint {
   label: string;
   value: number;
+}
+
+export interface DashboardTransaction {
+  description: string;
+  amount: number;
+  type: 'receita' | 'despesa';
+  date: string;
 }
 
 export interface DashboardSummary {
@@ -11,7 +16,7 @@ export interface DashboardSummary {
   expenses: number;
   averageTicket: number;
   deliveriesCount: number;
-  recentTransactions: Transaction[];
+  recentTransactions: DashboardTransaction[];
   revenueSeries: ChartPoint[];
   profitSeries: ChartPoint[];
   categoryBreakdown: ChartPoint[];

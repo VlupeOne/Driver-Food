@@ -1,0 +1,55 @@
+<section class="dashboard-shell">
+  <header class="dashboard-header">
+    <div>
+      <p class="label">Painel</p>
+      <h1>Resumo financeiro</h1>
+    </div>
+  </header>
+
+  <div class="summary-grid">
+    <app-summary-card title="Faturamento" [value]="summary?.revenue | number:'1.2-2'" icon="attach_money" accent="#4F46E5"></app-summary-card>
+    <app-summary-card title="Lucro" [value]="summary?.profit | number:'1.2-2'" icon="trending_up" accent="#10B981"></app-summary-card>
+    <app-summary-card title="Gastos" [value]="summary?.expenses | number:'1.2-2'" icon="payments" accent="#EF4444"></app-summary-card>
+    <app-summary-card title="Ticket médio" [value]="summary?.averageTicket | number:'1.2-2'" icon="receipt_long" accent="#0EA5E9"></app-summary-card>
+  </div>
+
+  <div class="charts-grid">
+    <article class="chart-card">
+      <header>
+        <span>Faturamento semanal</span>
+      </header>
+      <canvas #revenueCanvas aria-label="Faturamento semanal" role="img"></canvas>
+    </article>
+
+    <article class="chart-card">
+      <header>
+        <span>Lucro diário</span>
+      </header>
+      <canvas #profitCanvas aria-label="Lucro diário" role="img"></canvas>
+    </article>
+
+    <article class="chart-card full-width">
+      <header>
+        <span>Gastos por categoria</span>
+      </header>
+      <canvas #categoryCanvas aria-label="Gastos por categoria" role="img"></canvas>
+    </article>
+  </div>
+
+  <section class="recent-card">
+    <header>
+      <h2>Transações recentes</h2>
+    </header>
+    <div class="transactions-list">
+      <div *ngFor="let transaction of summary?.recentTransactions" class="transaction-item">
+        <div>
+          <strong>{{ transaction.description || 'Controle diário' }}</strong>
+          <p>{{ transaction.date | date:'dd/MM/yyyy' }}</p>
+        </div>
+        <div class="transaction-value" [class.income]="transaction.type === 'receita'" [class.expense]="transaction.type === 'despesa'">
+          {{ transaction.amount | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

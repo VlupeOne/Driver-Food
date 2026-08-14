@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="card">
+        <div class="header">
+            <h1>Cadastro</h1>
+            <p>Preencha seus dados para criar sua conta.</p>
+        </div>
+
+        <form [formGroup]="formulario" (ngSubmit)="cadastrar()">
+            <div class="grid">
+                <div class="campo">
+                    <label>Nome completo</label>
+                    <input
+                        type="text"
+                        formControlName="nome">
+                </div>
+              <div class="campo">
+                  <label>Email</label>
+
+                  <input
+                      type="email"
+                      formControlName="email"
+                      [class.campo-invalido]="emailDisponivel === false">
+
+                  <small
+                      class="mensagem-erro"
+                      *ngIf="emailDisponivel === false">
+                      E-mail em uso
+                  </small>
+              </div>
+                <div
+                class="campo"
+                *ngIf="!isOAuth">
+                    <label>Senha</label>
+                    <input
+                        type="password"
+                        formControlName="senha">
+                </div>
+              <div class="campo">
+                  <label>CPF</label>
+
+                  <input
+                      type="text"
+                      formControlName="cpf"
+                      [class.campo-invalido]="cpfDisponivel === false">
+
+                  <small
+                      class="mensagem-erro"
+                      *ngIf="cpfDisponivel === false">
+                      Esse CPF já está sendo utilizado
+                  </small>
+              </div>
+                <div class="campo">
+                    <label>Data de nascimento</label>
+                    <input
+                        type="date"
+                        formControlName="dataNascimento">
+                </div>
+                <div class="campo">
+                    <label>Motocicleta</label>
+                    <input
+                        type="text"
+                        formControlName="motocicleta">
+                </div>
+                <div class="campo placa">
+                    <label>Placa</label>
+                    <input
+                        type="text"
+                        formControlName="placa">
+                </div>
+            </div>
+            <button
+                type="submit"
+                [disabled]="
+                    carregando ||
+                    emailDisponivel === false ||
+                    cpfDisponivel === false
+                ">
+
+                {{ carregando ? 'Cadastrando...' : 'Cadastrar' }}
+
+            </button>
+        </form>
+    </div>
+</div>

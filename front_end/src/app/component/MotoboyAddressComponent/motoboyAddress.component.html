@@ -1,0 +1,95 @@
+<div class="container">
+
+  <div class="card">
+
+    <div class="header">
+      <h1>Endereço do Motoboy</h1>
+      <p>Informe seu endereço de atendimento</p>
+    </div>
+
+
+    <div class="grid">
+
+
+      <div class="campo placa">
+        <label>Buscar CEP</label>
+
+        <input
+          [(ngModel)]="cep"
+          placeholder="Digite o CEP">
+
+        <button
+          type="button"
+          (click)="buscarCep()">
+          Buscar CEP
+        </button>
+
+      </div>
+
+
+
+      <div class="campo">
+        <label>Logradouro</label>
+
+        <input
+          [(ngModel)]="address.logradouro">
+      </div>
+
+
+
+      <div class="campo">
+        <label>Complemento</label>
+
+        <input
+          [(ngModel)]="address.complemento">
+      </div>
+
+
+
+      <div class="campo">
+        <label>Bairro</label>
+
+        <input
+          [(ngModel)]="address.bairro">
+      </div>
+
+
+
+      <div class="campo">
+        <label>Cidade</label>
+
+        <input
+          [(ngModel)]="address.localidade">
+      </div>
+
+
+
+      <div class="campo">
+        <label>UF</label>
+
+        <input
+          [(ngModel)]="address.uf">
+      </div>
+
+
+    </div>
+
+
+    <button
+      (click)="salvar()">
+      Salvar endereço
+    </button>
+
+
+    <span class="mensagem-erro">
+      {{erro}}
+    </span>
+
+    <span>
+      {{mensagem}}
+    </span>
+
+
+  </div>
+
+</div>

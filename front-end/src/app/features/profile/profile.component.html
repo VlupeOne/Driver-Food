@@ -1,0 +1,44 @@
+<section class="page-shell">
+
+  <header>
+    <p class="label">Perfil</p>
+    <h1>Dados do motoboy</h1>
+  </header>
+
+  <div class="profile-avatar">
+
+    <img
+      *ngIf="perfil.foto"
+      [src]="perfil.foto"
+      alt="Foto do usuário">
+
+    <div
+      class="avatar-placeholder"
+      *ngIf="!perfil.foto">
+
+      {{ perfil.nome?.charAt(0) || '?' }}
+
+    </div>
+
+  </div>
+
+
+  <div class="profile-card">
+
+    <div
+      class="profile-item"
+      *ngFor="let item of dadosPerfil">
+
+      <span class="title">
+        {{ item.label }}
+      </span>
+
+      <span class="value">
+        {{ item.value || 'Não informado' }}
+      </span>
+
+    </div>
+
+  </div>
+
+</section>

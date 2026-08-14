@@ -1,0 +1,8 @@
+package com.example.financialmotoboy.dto;
+
+public record LoginRequest(
+
+    String email,
+    String password
+
+) {}

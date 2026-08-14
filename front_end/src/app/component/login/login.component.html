@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="card">
+        <div class="header">
+            <div class="logo">
+                🏍️
+            </div>
+            <h1>Entrar</h1>
+            <p>
+                Informe seu email e senha
+            </p>
+        </div>
+
+        <form
+            [formGroup]="form"
+            (ngSubmit)="login()">
+
+            <div class="grid">
+                <div class="campo">
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        formControlName="email"
+                        [class.campo-invalido]="campoInvalido('email')">
+                    <span
+                        class="mensagem-erro"
+                        *ngIf="campoInvalido('email')">
+                        Email inválido
+                    </span>
+                </div>
+
+                <div class="campo">
+                    <label>Senha</label>
+                    <input
+                        type="password"
+                        formControlName="password"
+                        [class.campo-invalido]="campoInvalido('password')">
+                    <span
+                        class="mensagem-erro"
+                        *ngIf="campoInvalido('password')">
+                        Informe a senha
+                    </span>
+                </div>
+            </div>
+
+            <button type="submit" [disabled]="carregando"> {{ carregando ? 'Entrando...' : 'Entrar' }}</button>
+
+            <span
+                class="mensagem-erro"
+                *ngIf="erro">
+                {{ erro }}
+            </span>
+
+        </form>
+
+        <div class="footer">
+            Ainda não possui conta?
+            <a routerLink="/register">
+                Cadastre-se
+            </a>
+        </div>
+
+    </div>
+
+</div>

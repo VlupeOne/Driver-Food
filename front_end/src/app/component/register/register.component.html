@@ -1,0 +1,94 @@
+<div class="container">
+
+  <div class="card">
+
+    <div class="header">
+      <h1>Cadastro de Motoboy</h1>
+      <p>Preencha seus dados para criar sua conta</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="register()">
+
+      <div class="grid">
+        <div class="campo">
+          <label>Nome</label>
+          <input
+            formControlName="name"
+            [class.campo-invalido]="campoInvalido('name')">
+
+          <span
+            class="mensagem-erro"
+            *ngIf="campoInvalido('name')">
+            Nome obrigatório
+          </span>
+        </div>
+
+        <div class="campo">
+          <label>Email</label>
+          <input
+            type="email"
+            formControlName="email"
+            [class.campo-invalido]="campoInvalido('email')">
+
+          <span
+            class="mensagem-erro"
+            *ngIf="campoInvalido('email')">
+            Email inválido
+          </span>
+        </div>
+
+        <div class="campo">
+          <label>CPF</label>
+          <input
+            formControlName="cpf">
+        </div>
+
+        <div class="campo">
+          <label>Data de nascimento</label>
+          <input
+            type="date"
+            formControlName="birthDate">
+        </div>
+
+        <div class="campo">
+          <label>Senha</label>
+          <input
+            type="password"
+            formControlName="password">
+        </div>
+
+        <div class="campo">
+          <label>Motocicleta</label>
+          <input
+            formControlName="motorcycle">
+        </div>
+
+        <div class="campo placa">
+          <label>Placa</label>
+          <input
+            formControlName="plate">
+        </div>
+
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="carregando">
+
+        {{ carregando ? 'Cadastrando...' : 'Cadastrar' }}
+
+      </button>
+
+      <p class="mensagem-erro" *ngIf="erro">
+        {{erro}}
+      </p>
+
+      <p style="color:green;margin-top:15px" *ngIf="mensagem">
+        {{mensagem}}
+      </p>
+
+    </form>
+
+  </div>
+
+</div>

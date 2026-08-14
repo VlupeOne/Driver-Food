@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="card">
+        <div class="header">
+            <div class="logo">
+                🔐
+            </div>
+            <h1>
+                Bem-vindo de volta
+            </h1>
+            <p>
+                Entre na sua conta para continuar
+            </p>
+        </div>
+        <form
+        [formGroup]="formulario"
+        (ngSubmit)="entrar()">
+            <div class="grid">
+                <div class="campo">
+                    <label>
+                        Email
+                    </label>
+                    <input
+                    type="email"
+                    placeholder="seu@email.com"
+                    formControlName="email">
+                </div>
+                <div class="campo">
+                    <label>
+                        Senha
+                    </label>
+                    <input
+                    type="password"
+                    placeholder="Digite sua senha"
+                    formControlName="senha">
+                </div>
+            </div>
+            <button
+            type="submit"
+            [disabled]="carregando">
+                {{
+                carregando
+                ?
+                'Entrando...'
+                :
+                'Entrar'
+                }}
+            </button>
+            <app-social-login></app-social-login>
+            <div class="footer">
+                <span>
+                    Ainda não possui conta?
+                </span>
+                <a>
+                    Criar cadastro
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -61,7 +61,7 @@
         </div>
       </div>
 
-      <div class="grid" *ngIf="categories$ | async as categories">
+      <div class="grid">
         <article *ngFor="let category of categories" class="category-card">
           <div class="category-header" [style.background]="category.color">
             <span class="material-icons">{{ category.icon }}</span>

@@ -23,6 +23,7 @@ export class DailyControlComponent implements OnInit {
   ) {
     this.dailyForm = this.fb.group({
       faturamento: [null, [Validators.required, Validators.min(0.01)]],
+      date: [''],
       gasolina: [0, [Validators.min(0)]],
       comida: [0, [Validators.min(0)]],
       observation: [''],
@@ -136,6 +137,7 @@ export class DailyControlComponent implements OnInit {
 
         this.dailyForm.reset({
           faturamento: null,
+          date: '',
           gasolina: 0,
           comida: 0,
           observation: '',
